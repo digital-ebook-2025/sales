@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050505;
+    color: #f0f0f0;
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: #050505;
+    background-size: cover;
+    filter: blur(3px);
+    opacity: 0.15;
+    transition: opacity 1s ease;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.9), rgba(5, 5, 5, 0.7));
+}
+
+header {
+    background: rgba(5, 5, 5, 0.93);
+    padding: 20px 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+}
+
+header.sticky {
+    background: rgba(5, 5, 5, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    padding: 15px 50px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #00ff00;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #00ff00, #00cc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #ff1e1e, #ff4f4f);
+    color: #ffffff;
+    padding: 14px 35px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 15px rgba(255, 30, 30, 0.4);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(255, 30, 30, 0.6);
+    background: linear-gradient(135deg, #ff4f4f, #ff1e1e);
+}
+
+.banner {
+    padding: 120px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(0, 0, 0, 0.9));
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.05), transparent);
+    animation: pulse 15s infinite ease-in-out;
+    z-index: 0;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.1; }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.banner img {
+    max-width: 100%;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    margin-bottom: 30px;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.banner img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 255, 0, 0.2);
+}
+
+.banner h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #00ff00;
+    background: linear-gradient(45deg, #00ff00, #00cc00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 25px;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.banner p {
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #c0c0c0;
+    font-weight: 300;
+}
+
+.benefits {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 50px;
+    background: rgba(15, 15, 15, 0.98);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.benefits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.03), transparent);
+    z-index: 0;
+}
+
+.benefits:hover {
+    transform: translateY(-8px);
+}
+
+.benefits-content {
+    position: relative;
+    z-index: 1;
+}
+
+.benefits h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #00ff00;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.benefits p {
+    font-size: 1.2rem;
+    color: #c0c0c0;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.benefits ul {
+    list-style: none;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits ul li {
+    margin: 10px 0;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px;
+    border-left: 3px solid #00ff00;
+    transition: background 0.3s ease;
+}
+
+.benefits ul li:hover {
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.benefits ul li i {
+    color: #00ff00;
+    font-size: 1.4rem;
+    margin-top: 5px;
+}
+
+.benefits dl {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits dt {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 15px 0 10px;
+    color: #00ff00;
+    text-transform: uppercase;
+}
+
+.benefits dd {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #c0c0c0;
+    font-weight: 300;
+}
+
+.comprar .cta-button {
+    display: block;
+    margin: 40px auto;
+    font-size: 1.3rem;
+    padding: 18px 50px;
+    box-shadow: 0 6px 20px rgba(255, 30, 30, 0.5);
+}
+
+footer {
+    background: rgba(5, 5, 5, 0.99);
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 2px solid rgba(0, 255, 0, 0.1);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 255, 0, 0.03), transparent);
+    z-index: 0;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin: 0 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.4s ease;
+}
+
+footer a:hover {
+    color: #00ff00;
+}
+
+.social-icons {
+    margin: 30px 0;
+}
+
+.social-icons a {
+    font-size: 2rem;
+    margin: 0 20px;
+    color: #f0f0f0;
+    transition: all 0.4s ease;
+}
+
+.social-icons a:hover {
+    color: #00ff00;
+    transform: translateY(-5px);
+}
+
+footer p {
+    font-size: 1rem;
+    color: #808080;
+    margin: 8px 0;
+    font-weight: 300;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(45deg, #00ff00, #00cc00);
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 20px rgba(0, 255, 0, 0.6);
+}
+
+.price-highlight {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #00ff00;
+    margin: 20px 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1200px) {
+    .benefits ul,
+    .benefits dl {
+        grid-template-columns: 1fr;
+    }
+
+    .banner h2 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .banner {
+        padding: 80px 15px;
+        min-height: auto;
+    }
+
+    .banner img {
+        width: 300px;
+    }
+
+    .banner h2 {
+        font-size: 2.5rem;
+    }
+
+    .banner p {
+        font-size: 1.2rem;
+    }
+
+    .benefits {
+        margin: 30px 10px;
+        padding: 30px;
+    }
+
+    .benefits h3 {
+        font-size: 2rem;
+    }
+
+    .comprar .cta-button {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner img {
+        width: 250px;
+    }
+
+    .banner h2 {
+        font-size: 2rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+
+    .benefits h3 {
+        font-size: 1.8rem;
+    }
+
+    .benefits ul li,
+    .benefits dd {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}

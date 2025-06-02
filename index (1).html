@@ -1,0 +1,136 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Revolucione seu negócio com o eBook de Marketing Digital. Estratégias avançadas para maximizar vendas e engajamento.">
+    <meta name="keywords" content="marketing digital, eBook, estratégias de vendas, crescimento online, negócios digitais">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="eBook de Marketing Digital">
+    <meta property="og:description" content="Descubra como transformar suas vendas online com estratégias práticas e comprovadas. Adquira já o eBook!">
+    <meta property="og:type" content="website">
+    <title>Revolucione com o eBook de Marketing Digital</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="background-overlay"></div>
+
+    <section class="banner" id="home">
+        <div class="banner-content">
+            <h2>Domine o Marketing Digital e Transforme Suas Vendas Online!</h2>
+            <p>Descubra estratégias testadas para atrair clientes, aumentar conversões e escalar seu negócio com confiança.</p>
+            <button class="cta-button" onclick="window.location.href='#comprar'">Quero Transformar Meu Negócio</button>
+        </div>
+    </section>
+
+    <main>
+        <section class="benefits" id="beneficios">
+            <div class="benefits-content">
+                <h3>O Poder do Nosso eBook</h3>
+                <p>Um guia definitivo para dominar o marketing digital, projetado para acelerar seu sucesso:</p>
+                <ul>
+                    <li><i class="fas fa-rocket"></i><span><strong>Estratégias Imediatas:</strong> Técnicas práticas que você pode aplicar hoje mesmo.</span></li>
+                    <li><i class="fas fa-users"></i><span><strong>Para Todos os Níveis:</strong> Conteúdo claro para iniciantes e avançado para profissionais.</span></li>
+                    <li><i class="fas fa-bolt"></i><span><strong>Resultados Acelerados:</strong> Métodos que maximizam impacto em menos tempo.</span></li>
+                    <li><i class="fas fa-chart-line"></i><span><strong>Análise de Dados Simplificada:</strong> Aprenda a usar métricas para otimizar suas campanhas em tempo real.</span></li>
+                    <li><i class="fas fa-mobile-alt"></i><span><strong>Otimização para Mobile:</strong> Estratégias específicas para engajar usuários em dispositivos móveis.</span></li>
+                    <li><i class="fas fa-handshake"></i><span><strong>Construção de Confiança:</strong> Técnicas para criar autoridade e fidelizar clientes online.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="benefits" id="chamada-para-acao">
+            <div class="benefits-content">
+                <h3>Seu Futuro Começa Agora</h3>
+                <p>Não deixe o sucesso esperar. Adquira o eBook e comece a transformar sua carreira hoje!</p>
+                <button class="cta-button" onclick="window.location.href='#comprar'">Iniciar Transformação</button>
+            </div>
+        </section>
+
+        <section class="benefits" id="faq">
+            <div class="benefits-content">
+                <h3>Dúvidas Respondidas</h3>
+                <dl>
+                    <dt>Qual é o formato do eBook?</dt>
+                    <dd>PDF responsivo, otimizado para todos os dispositivos.</dd>
+                    <dt>Posso solicitar reembolso?</dt>
+                    <dd>Sim, garantimos sua satisfação com reembolso em até 7 dias.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section class="benefits comprar" id="comprar">
+            <div class="benefits-content">
+                <h3>Invista no Seu Sucesso</h3>
+                <p>Transforme seu negócio com um pequeno investimento que trará retornos extraordinários.</p>
+                <p class="price-highlight">Apenas R$ 19,90</p>
+                <button class="cta-button">Comprar Agora</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="#home">Home</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#faq">FAQ</a>
+                <a href="#comprar">Comprar</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.tiktok.com/@visaoempreendedora77?_t=ZM-8w8AuMrv4tD&_r=1" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p>© 2025 Todos os direitos reservados.</p>
+            <p>Entre em contato: contato@visaodigital.com</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
